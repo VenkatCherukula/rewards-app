@@ -3,10 +3,7 @@
  */
 package com.batch.rewards;
 
-import java.net.MalformedURLException;
-
 import javax.sql.DataSource;
-
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.DefaultBatchConfigurer;
@@ -23,10 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.UrlResource;
-import org.springframework.core.io.FileSystemResource;
-
-
 import com.batch.rewards.processor.RewardsProcessor;
 import com.batch.rewards.writer.RewardsWriter;
 
@@ -37,7 +30,6 @@ import com.batch.rewards.writer.RewardsWriter;
 @Configuration
 @EnableBatchProcessing
 public class BatchConfiguration extends DefaultBatchConfigurer{
-
 	
 	@Autowired
 	public JobBuilderFactory jobBuilderFactory;
@@ -62,11 +54,9 @@ public class BatchConfiguration extends DefaultBatchConfigurer{
 	        FlatFileItemReader<PurchaseItem> reader = new FlatFileItemReader<>();
 	         
 	        //Set input file location
-	        //reader.setResource(new FileSystemResource("purchase-input-data.xlsx"));
-	        
 	        reader.setResource(new ClassPathResource("test-file.csv"));
-	        
 	        reader.setName("test-file");
+
 	        //Set number of lines to skips. Use it if file has header rows.
 	        reader.setLinesToSkip(1);   
 	         
@@ -76,7 +66,7 @@ public class BatchConfiguration extends DefaultBatchConfigurer{
 	                //3 columns in each row
 	                setLineTokenizer(new DelimitedLineTokenizer() {
 	                    {
-	                        setNames(new String[] {"customerID", "customerNa", "itemName", "amount", "date",
+	                        setNames(new String[] {"customerID", "customerNa", "itemID",  "itemName", "quantity", "price", "date",
 	                       	  "rewards" });
 	                    }
 	                });
@@ -114,7 +104,7 @@ public class BatchConfiguration extends DefaultBatchConfigurer{
 	@Bean
 	public Step step1() {
 	  return stepBuilderFactory.get("step1")
-	    .<PurchaseItem, PurchaseItem> chunk(10)
+	    .<PurchaseItem, PurchaseItem> chunk(50)
 	    .reader(this.reader())
 	    .processor(this.processor())
 	    .writer(this.writer())

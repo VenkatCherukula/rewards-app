@@ -8,12 +8,12 @@ import java.io.Serializable;
 /**
  * Purchase item
  */
-public class PurchaseItem {
+public class PurchaseItem implements Serializable {
 
 	/**
 	 * 
 	 */
-	//private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Customer ID
@@ -26,14 +26,24 @@ public class PurchaseItem {
 	private String customerNa;	
 	
 	/**
+	 * item ID = unique
+	 */
+	private Integer itemID;
+	
+	/**
 	 * item name
 	 */
 	private String itemName;
+
+	/**
+	 * item price
+	 */
+	private Integer quantity;
 	
 	/**
 	 * item price
 	 */
-	private Double amount;
+	private Double price;
 	
 	/**
 	 * purchase date 
@@ -50,53 +60,6 @@ public class PurchaseItem {
 		
 	}
 
-
-	/**
-	 * @return the itemName
-	 */
-	public String getItemName() {
-		return itemName;
-	}
-
-
-	/**
-	 * @param itemName the itemName to set
-	 */
-	public void setItemName(String itemName) {
-		this.itemName = itemName;
-	}
-
-
-	/**
-	 * @return the amount
-	 */
-	public Double getAmount() {
-		return amount;
-	}
-
-
-	/**
-	 * @param amount the amount to set
-	 */
-	public void setAmount(Double amount) {
-		this.amount = amount;
-	}
-
-
-	/**
-	 * @return the date
-	 */
-	public String getDate() {
-		return date;
-	}
-
-
-	/**
-	 * @param date the date to set
-	 */
-	public void setDate(String date) {
-		this.date = date;
-	}
 
 
 	/**
@@ -128,6 +91,84 @@ public class PurchaseItem {
 	 */
 	public void setCustomerNa(String customerNa) {
 		this.customerNa = customerNa;
+	}
+
+	/**
+	 * @return the itemID
+	 */
+	public Integer getItemID() {
+		return itemID;
+	}
+
+
+	/**
+	 * @param itemID the itemID to set
+	 */
+	public void setItemID(Integer itemID) {
+		this.itemID = itemID;
+	}
+
+	/**
+	 * @return the itemName
+	 */
+	public String getItemName() {
+		return itemName;
+	}
+
+
+	/**
+	 * @param itemName the itemName to set
+	 */
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+
+
+	/**
+	 * @return the quantity
+	 */
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+
+	/**
+	 * @param quantity the quantity to set
+	 */
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+
+	
+	/**
+	 * @return the price
+	 */
+	public Double getPrice() {
+		return price;
+	}
+
+
+	/**
+	 * @param price the price to set
+	 */
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+
+	/**
+	 * @return the date
+	 */
+	public String getDate() {
+		return date;
+	}
+
+
+	/**
+	 * @param date the date to set
+	 */
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 
